@@ -5,7 +5,7 @@ import { Layout } from './Layout';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import toast, { Toaster } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
 import { fetchPictures } from './services/api';
 import { Loader } from './Loader/Loader';
@@ -37,7 +37,7 @@ export const App = () => {
     const newQuery = event.target.elements.query.value;
 
     if (newQuery === "") {
-      return Notify.warning('Search field is empty. Please, enter your request');
+      return toast.error('Search field is empty. Please, enter your request');
     }
 
     setQuery(`${nanoid()}/${newQuery}`);
@@ -84,7 +84,7 @@ export const App = () => {
           const allPages = Math.ceil(data.totalHits / perPage);
 
           if (data.totalHits === 0) {
-            Notify.failure('Sorry, there are no images matching your search request. Please try another request.');
+            toast.error('Sorry, there are no images matching your search request. Please try another request.');
             return;
           }
           setImages(data.hits);
@@ -125,6 +125,7 @@ export const App = () => {
             : (page < totalPages && <Button onClick={loadMore} />)
           }
         </Layout>
+        <Toaster/>
       </AppWrapp>
     </>
   );
