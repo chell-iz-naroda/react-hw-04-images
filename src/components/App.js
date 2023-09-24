@@ -22,7 +22,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoadding] = useState(false);
-  const [perPage, setPerPage] = useState(12);
+  const perPage = 12;
 
   const intervalId = useRef(null);
 
